@@ -2,23 +2,26 @@ package utils;
 
 import model.Employee;
 
+/**
+ * Utility class responsible for generating employee payslips.
+ * Adheres to OOP principles by encapsulating the payslip generation logic.
+ * Provides detailed breakdowns of allowances, deductions, and net salary.
+ */
 public class PayslipGenerator {
 
     /**
-     * Generates a payslip for an employee.
+     * Generates and prints the payslip for a given employee.
      *
-     * @param employee       The employee object containing personal and salary details.
-     * @param hoursWorked    The total hours worked by the employee.
-     * @param grossSalary    The gross salary calculated.
-     * @param sss            The SSS deduction amount.
-     * @param philHealth     The PhilHealth deduction amount.
-     * @param pagIbig        The Pag-IBIG deduction amount.
-     * @param withholdingTax The withholding tax amount.
-     * @param netSalary      The final net salary after deductions.
+     * @param employee The employee whose payslip is being generated.
+     * @param hoursWorked The number of hours worked by the employee.
+     * @param grossSalary The gross salary calculated based on hours worked and allowances.
+     * @param sss The SSS contribution amount.
+     * @param philHealth The PhilHealth contribution amount.
+     * @param pagIbig The Pag-IBIG contribution amount.
+     * @param withholdingTax The computed withholding tax amount.
+     * @param netSalary The net salary after all deductions.
      */
-    public static void generatePayslip(Employee employee, double hoursWorked, double grossSalary,
-                                       double sss, double philHealth, double pagIbig,
-                                       double withholdingTax, double netSalary) {
+    public static void generatePayslip(Employee employee, double hoursWorked, double grossSalary, double sss, double philHealth, double pagIbig, double withholdingTax, double netSalary) {
 
         // ✅ Compute total allowances, including clothing allowance
         double totalAllowances = employee.getRiceSubsidy() + employee.getPhoneAllowance() + employee.getClothingAllowance();
@@ -43,7 +46,7 @@ public class PayslipGenerator {
         System.out.printf(" Supervisor: %-30s%n", employee.getSupervisor());
         System.out.println("-------------------------------------------");
         System.out.printf(" %-30s PHP %12.2f%n", "Basic Salary:", employee.getBasicSalary());
-        System.out.printf(" %-30s PHP %12.2f%n", "Hourly Rate:", (employee.getBasicSalary() / 168));  // Based on 168 for full-time work
+        System.out.printf(" %-30s PHP %12.2f%n", "Hourly Rate:", (employee.getBasicSalary() / 168));
         System.out.printf(" %-30s %10.2f%n", "Hours Worked:", hoursWorked);
         System.out.printf(" %-30s PHP %12.2f%n", "Gross Salary:", grossSalary);
         System.out.println("-------------------------------------------");
@@ -61,9 +64,6 @@ public class PayslipGenerator {
         System.out.println("-------------------------------------------");
         System.out.printf(" ✅ %-30s PHP %12.2f%n", "Final Net Salary:", finalNetSalary);
         System.out.println("===========================================");
-        System.out.println(" Employee Signature: _____________________ ");
-        System.out.println(" Supervisor Signature: ___________________ ");
-        System.out.println(" Date: _________________________________ ");
-        System.out.println("===========================================");
     }
 }
+
