@@ -1,58 +1,47 @@
 package utils;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
- * DeductionsCalculator class calculates mandatory deductions.
+ * Utility class for calculating various mandatory deductions.
+ * This class adheres to OOP principles by encapsulating deduction calculation logic.
+ * The supported deductions include Pag-IBIG, PhilHealth, SSS, and tax.
  */
 public class DeductionsCalculator {
-    private static final Logger LOGGER = Logger.getLogger(DeductionsCalculator.class.getName());
-
-    private static final double PAGIBIG_RATE = 0.02;
-    private static final double PAGIBIG_CAP = 100.0;
 
     /**
-     * Calculates the Pag-IBIG deduction based on the gross salary.
-     * @param grossSalary Gross salary of the employee
-     * @return Pag-IBIG deduction amount
+     * Calculates the Pag-IBIG contribution based on the gross salary.
+     * The maximum contribution is capped at PHP 100.
+     * @param grossSalary The gross salary of the employee.
+     * @return The computed Pag-IBIG contribution.
      */
     public static double calculatePagIbig(double grossSalary) {
-        double deduction = Math.min(grossSalary * PAGIBIG_RATE, PAGIBIG_CAP);
-        LOGGER.log(Level.INFO, "Pag-IBIG deduction calculated: {0}", deduction);
-        return deduction;
+        return Math.min(grossSalary * 0.03, 100);
     }
 
     /**
-     * Calculates the PhilHealth contribution based on the gross salary.
-     * @param grossSalary Gross salary of the employee
-     * @return PhilHealth contribution amount
+     * Calculates the PhilHealth contribution by utilizing the PhilHealthCalculator.
+     * @param grossSalary The gross salary of the employee.
+     * @return The computed PhilHealth contribution.
      */
     public static double calculatePhilHealth(double grossSalary) {
-        double deduction = PhilHealthCalculator.getPhilHealthContribution(grossSalary);
-        LOGGER.log(Level.INFO, "PhilHealth deduction calculated: {0}", deduction);
-        return deduction;
+        return PhilHealthCalculator.getPhilHealthContribution(grossSalary);
     }
 
     /**
-     * Calculates the SSS contribution based on the gross salary.
-     * @param grossSalary Gross salary of the employee
-     * @return SSS contribution amount
+     * Calculates the SSS contribution by utilizing the SSSCalculator.
+     * @param grossSalary The gross salary of the employee.
+     * @return The computed SSS contribution.
      */
     public static double calculateSSS(double grossSalary) {
-        double deduction = SSSCalculator.getSSSContribution(grossSalary);
-        LOGGER.log(Level.INFO, "SSS deduction calculated: {0}", deduction);
-        return deduction;
+        return SSSCalculator.getSSSContribution(grossSalary);
     }
 
     /**
-     * Calculates the withholding tax based on the taxable income.
-     * @param taxableIncome Taxable income of the employee
-     * @return Withholding tax amount
+     * Calculates the withholding tax by utilizing the TaxCalculator.
+     * @param taxableIncome The taxable income of the employee.
+     * @return The computed withholding tax.
      */
     public static double calculateTax(double taxableIncome) {
-        double tax = TaxCalculator.computeWithholdingTax(taxableIncome);
-        LOGGER.log(Level.INFO, "Withholding tax calculated: {0}", tax);
-        return tax;
+        return TaxCalculator.computeWithholdingTax(taxableIncome);
     }
 }
+
